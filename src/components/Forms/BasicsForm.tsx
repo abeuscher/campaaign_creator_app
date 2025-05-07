@@ -44,8 +44,6 @@ const BasicsForm: React.FC<BasicsFormProps> = ({
     generateCompletion, 
     isGenerating, 
     error,
-    completionProvider,
-    setCompletionProvider
   } = useCompletionGenerator({
     campaignData,
     onUpdateCampaign: updateCampaignData
@@ -71,11 +69,8 @@ const BasicsForm: React.FC<BasicsFormProps> = ({
     value: any; 
     updateData: React.Dispatch<React.SetStateAction<any>>; 
   }) => {
-    if (field.includes('.')) {
       handleBasicChange({ section, field, value, updateData });
-    } else {
-      handleBasicChange({ section, field, value, updateData });
-    }
+
   };
   
   // Handle completion request

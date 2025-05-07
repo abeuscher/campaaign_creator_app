@@ -27,7 +27,7 @@ export default function Home() {
         </Typography>
         
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-          <Link href="/wizard" passHref>
+          <Link href="/editor" passHref>
             <Button variant="contained" color="primary" size="large">
               Start the Wizard
             </Button>

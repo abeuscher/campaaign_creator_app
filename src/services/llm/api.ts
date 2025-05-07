@@ -77,29 +77,17 @@ class MistralAPI {
 }
 
 class AnthropicAPI {
-  private apiKey: string;
-  private model: string;
-  private maxTokens: number;
-
-  constructor(config: LLMAPIConfig) {
-    this.apiKey = config.apiKey || process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '';
-    this.model = config.model || DEFAULT_MODELS.anthropic;
-    this.maxTokens = config.maxTokens || 4096;
-  }
 
   async complete(prompt: LLMPrompt): Promise<LLMResponse> {
     try {
       // Format as Anthropic requires
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      console.log('Anthropic API call:', prompt);
+      const response = await fetch('/.netlify/functions/anthropic-chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': this.apiKey,
-          'anthropic-version': '2023-06-01'
         },
         body: JSON.stringify({
-          model: this.model,
-          max_tokens: this.maxTokens,
           messages: [{ role: 'user', content: prompt.content }],
           system: prompt.systemContext || ''
         })
@@ -111,8 +99,9 @@ class AnthropicAPI {
       }
 
       const data = await response.json();
+      console.log('Anthropic API response:', data);
       return {
-        content: data.content[0].text,
+        content: data,
         success: true
       };
     } catch (error) {

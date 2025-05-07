@@ -33,6 +33,7 @@ export function useCompletionGenerator({
   onUpdateCampaign,
   defaultProvider = 'anthropic'
 }: CompletionGeneratorProps): CompletionGeneratorReturn {
+  console.log("Campaign Data:", campaignData);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [completionProvider, setCompletionProvider] = useState<CompletionProvider>(defaultProvider);
