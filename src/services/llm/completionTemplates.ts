@@ -104,7 +104,32 @@ function deepMerge(target: any, source: any): any {
 function isObject(item: any): boolean {
   return item && typeof item === 'object' && !Array.isArray(item);
 }
-
+// Add this function to normalize keys in any object
+function normalizeObjectKeys(obj: any): any {
+  if (!obj || typeof obj !== 'object') return obj;
+  
+  // Handle arrays
+  if (Array.isArray(obj)) {
+    return obj.map(item => normalizeObjectKeys(item));
+  }
+  
+  const normalized: Record<string, any> = {};
+  
+  // Process each key in the object
+  Object.entries(obj).forEach(([key, value]) => {
+    // Convert key to camelCase
+    const normalizedKey = key.charAt(0).toLowerCase() + key.slice(1);
+    
+    // Handle nested objects and arrays recursively
+    if (typeof value === 'object' && value !== null) {
+      normalized[normalizedKey] = normalizeObjectKeys(value);
+    } else {
+      normalized[normalizedKey] = value;
+    }
+  });
+  
+  return normalized;
+}
 // Generic completion template generator
 export const createCompletionTemplate = (sectionName: string, sectionDisplayName: string) => {
   return {
@@ -165,10 +190,12 @@ export const createCompletionTemplate = (sectionName: string, sectionDisplayName
         
         // Extract and process JSON from the response
         const responseData = extractJSONFromResponse(response.content);
+          // Normalize keys to camelCase
+        const normalizedData = normalizeObjectKeys(responseData);
+    
         const currentSection = existingData[sectionName as keyof Campaign] || {};
-        
-        // Deep merge response with existing data
-        const updatedSection = deepMerge(currentSection, responseData);
+    
+        const updatedSection = deepMerge(currentSection, normalizedData);   
         
         return {
           ...existingData,

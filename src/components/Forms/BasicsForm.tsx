@@ -48,7 +48,8 @@ const BasicsForm: React.FC<BasicsFormProps> = ({
     campaignData,
     onUpdateCampaign: updateCampaignData
   });
-
+  
+  console.log("BasicsForm - Campaign Data:", campaignData);
   // Define fields for the basics section
   const basicFields: FieldDef[] = [
     { name: 'title', label: 'Campaign Title', fullWidth: true },

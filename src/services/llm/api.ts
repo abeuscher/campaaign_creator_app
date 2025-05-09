@@ -101,7 +101,7 @@ class AnthropicAPI {
       const data = await response.json();
       console.log('Anthropic API response:', data);
       return {
-        content: data,
+        content: data[1].content,
         success: true
       };
     } catch (error) {
