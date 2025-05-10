@@ -50,7 +50,7 @@ type HandleArrayChangeProps = {
 
 // Handle basic text field changes
 export const handleBasicChange = ({ section, field, value, updateData }: HandleChangeProps) => {
-  updateData(prevData => ({
+  updateData((prevData: Record<string, any>) => ({
     ...prevData,
     [section]: {
       ...(prevData[section] || {}),
@@ -63,7 +63,7 @@ export const handleBasicChange = ({ section, field, value, updateData }: HandleC
 export const handleNestedChange = ({ section, field, value, updateData }: HandleChangeProps) => {
   const [subSection, subField] = field.split('.');
   
-  updateData(prevData => ({
+  updateData((prevData: Record<string, any>) => ({
     ...prevData,
     [section]: {
       ...(prevData[section] || {}),
@@ -84,7 +84,7 @@ export const handleArrayItemChange = ({
   value, 
   updateData 
 }: HandleArrayChangeProps) => {
-  updateData(prevData => {
+  updateData((prevData: Record<string, any>) => {
     const sectionData = prevData[section] || {};
     const array = [...(sectionData[arrayName] || [])];
     
@@ -113,7 +113,7 @@ export const handleAddArrayItem = (
   arrayName: string, 
   updateData: React.Dispatch<React.SetStateAction<any>>
 ) => {
-  updateData(prevData => {
+  updateData((prevData: Record<string, any>) => {
     const sectionData = prevData[section] || {};
     const array = [...(sectionData[arrayName] || [])];
     
@@ -136,7 +136,7 @@ export const handleRemoveArrayItem = (
   index: number, 
   updateData: React.Dispatch<React.SetStateAction<any>>
 ) => {
-  updateData(prevData => {
+  updateData((prevData: Record<string, any>) => {
     const sectionData = prevData[section] || {};
     const array = [...(sectionData[arrayName] || [])];
     
@@ -169,7 +169,7 @@ export const renderObjectFields = (
           : formData?.[section]?.[field.name] || '';
           
         return (
-          <Grid item xs={12} md={field.fullWidth ? 12 : 6} key={field.name}>
+          <Grid key={field.name}>
             <TextField
               fullWidth
               label={field.label}
@@ -230,7 +230,7 @@ export const renderArrayFields = (
           
           <Grid container spacing={2}>
             {fields.map(field => (
-              <Grid item xs={12} sm={field.multiline ? 12 : 6} key={field.name}>
+              <Grid key={field.name}>
                 <TextField
                   fullWidth
                   label={field.label}

@@ -172,7 +172,7 @@ export class LLMAPIFactory {
       case 'mistral':
         return new MistralAPI(config);
       case 'anthropic':
-        return new AnthropicAPI(config);
+        return new AnthropicAPI();
       case 'openai':
         return new OpenAIAPI(config);
       default:

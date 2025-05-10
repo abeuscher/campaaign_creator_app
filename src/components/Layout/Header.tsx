@@ -25,17 +25,7 @@ const Header: React.FC = () => {
               Home
             </Button>
           </Link>
-          <Link href="/wizard" passHref>
-            <Button 
-              color="inherit"
-              sx={{ 
-                fontWeight: router.pathname === '/wizard' ? 'bold' : 'normal',
-                textDecoration: router.pathname === '/wizard' ? 'underline' : 'none'
-              }}
-            >
-              Wizard
-            </Button>
-          </Link>
+      
           <Link href="/editor" passHref>
             <Button 
               color="inherit"

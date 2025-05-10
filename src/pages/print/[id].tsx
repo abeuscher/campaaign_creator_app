@@ -193,35 +193,35 @@ const CampaignPrint: React.FC = () => {
           <Box className="section">
             <Grid container spacing={2}>
               {campaign.basics?.theme && (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid>
                   <Typography variant="body2">
                     <strong>Theme:</strong> {campaign.basics.theme}
                   </Typography>
                 </Grid>
               )}
               {campaign.basics?.tone && (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid>
                   <Typography variant="body2">
                     <strong>Tone:</strong> {campaign.basics.tone}
                   </Typography>
                 </Grid>
               )}
               {campaign.basics?.levelRange && (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid>
                   <Typography variant="body2">
                     <strong>Level Range:</strong> {campaign.basics.levelRange}
                   </Typography>
                 </Grid>
               )}
               {campaign.basics?.estimatedDuration && (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid>
                   <Typography variant="body2">
                     <strong>Duration:</strong> {campaign.basics.estimatedDuration}
                   </Typography>
                 </Grid>
               )}
               {campaign.basics?.playerCount && (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid>
                   <Typography variant="body2">
                     <strong>Players:</strong> {campaign.basics.playerCount.recommended} 
                     ({campaign.basics.playerCount.min}-{campaign.basics.playerCount.max})
