@@ -74,10 +74,6 @@ function findMissingFields(data: any, schema?: any): string[] {
 // Helper function to format field names for display
 function formatFieldName(field: string): string {
   return field
-    .split(/\.|\[|\]/)
-    .filter(Boolean)
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
 }
 
 // Deep merge utility for combining existing data with LLM response
@@ -107,7 +103,7 @@ function isObject(item: any): boolean {
 // Add this function to normalize keys in any object
 function normalizeObjectKeys(obj: any): any {
   if (!obj || typeof obj !== 'object') return obj;
-  
+  console.log('Normalizing object keys:', obj);
   // Handle arrays
   if (Array.isArray(obj)) {
     return obj.map(item => normalizeObjectKeys(item));
@@ -127,7 +123,7 @@ function normalizeObjectKeys(obj: any): any {
       normalized[normalizedKey] = value;
     }
   });
-  
+  console.log('Normalized object:', normalized);
   return normalized;
 }
 // Generic completion template generator
@@ -197,6 +193,8 @@ export const createCompletionTemplate = (sectionName: string, sectionDisplayName
     
         const updatedSection = deepMerge(currentSection, normalizedData);   
         
+        console.log(`Updated ${sectionName} section:`, updatedSection);
+
         return {
           ...existingData,
           [sectionName]: updatedSection

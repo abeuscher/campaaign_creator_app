@@ -5,7 +5,7 @@
   "author": "Alex Beuscher",
   "description": "A wizard-based application for creating tabletop RPG campaign outlines with LLM assistance",
   "scripts": {
-    "dev": "next dev",
+    "dev": "netlify dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
